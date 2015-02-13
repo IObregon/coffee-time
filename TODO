@@ -38,3 +38,18 @@
 ** Crear direccion GET /api/pago Devuelve la lista de lo que hay que pedir, cuanto es el total estimado y a quien le toca pagar.
 ** Crear vista.
 ** Crear direccion POST /api/pago Introduccir cuanto ha sido el pago correcto del dia.
+
+*** Extras
+
+****************************************
+***************ENTIDADES****************
+****************************************
+
+Personas: {Nombre, Balance, NBajada, NPagado}
+Gastos: {|Persona|, Fecha, |Cosumicion|}
+Ingresos: {|Persona|, Cantidad, Fecha}
+Consumicion: {Nombre, Tipo, Precio}
+Real: {Precio, Fecha}
+
+
+
