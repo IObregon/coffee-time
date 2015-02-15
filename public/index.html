@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+	<base href="/">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Coffee-Time</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="navbar navbar-default navbar-static-top"
+       role="navigation" bs-navbar>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <span class="glyphicon glyphicon-film"></span>
+        Coffee<strong>Time</strong></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li data-match-route="/$"><a href="/">Home</a></li>
+    </ul>
+    <ul class="nav navbar-nav pull-right" ng-if="!currentUser">
+      <li data-match-route="/login"><a href="/login">Login</a></li>
+      <li data-match-route="/signup"><a href="/signup">Registrase</a></li>
+    </ul>
+    <ul class="nav navbar-nav pull-right" ng-if="currentUser">
+      <li class="navbar-text" ng-bind="currentUser.email"></li>
+      <li><a href="javascript:void(0)" ng-click="logout()">Desconectar</a></li>
+    </ul>
+  </div>
+
+<div ng-view></div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.tpl.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-resource.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-cookies.js"></script>
+
+
+
+<script src="app.js"></script>
+<script src="controllers/MainCtrl.js"></script>
+<script src="directives/repeatPassword.js"></script>
+<script src="controllers/signup.js"></script>
+<script src="controllers/login.js"></script>
+<script src="services/auth.js"></script>
+<script src="controllers/navbar.js"></script>
+
+</body>
+</html>
