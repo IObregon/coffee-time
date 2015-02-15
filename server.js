@@ -31,13 +31,10 @@ passport.deserializeUser(function(id, done) {
 
 passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, password, done) {
   Persona.findOne({ email: email }, function(err, persona) {
-  	console.log(persona.password);
-  	console.log(password);
     if (err) return done(err);
     if (!persona) return done(null, false);
     persona.comparePassword(password, function(err, isMatch) {
       if (err) return done(err);
-      console.log(isMatch);
       if (isMatch) return done(null, persona);
       return done(null, false);
     });
@@ -52,8 +49,8 @@ app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
-  if (req.persona) {
-    res.cookie('persona', JSON.stringify(req.persona));
+  if (req.user) {
+    res.cookie('user', JSON.stringify(req.user));
   }
   next();
 });
@@ -73,8 +70,8 @@ app.get('/', function(req, res){
 });
 
 app.post('/api/login', passport.authenticate('local'), function(req, res) {
-  res.cookie('persona', JSON.stringify(req.persona));
-  res.send(req.persona);
+  res.cookie('user', JSON.stringify(req.user));
+  res.send(req.user);
 });
 
 app.post('/api/signup', function(req, res, next) {

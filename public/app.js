@@ -4,7 +4,7 @@ angular.module('MyApp', ['ngRoute','ngResource','ngCookies'])
     	$routeProvider
 			.when('/', {
 				templateUrl: 'views/home.html',
-				controller: 'MainCtrl'
+				//controller: 'MainCtrl'
 			})
 			.when('/login', {
 				templateUrl: 'views/login.html',

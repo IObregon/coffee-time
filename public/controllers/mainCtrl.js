@@ -1,4 +1,4 @@
 angular.module('MyApp')
-  .controller('MainCtrl', function(){
-  	
-  }); 
+  .controller('MainCtrl', ['$scope', function($scope) {
+
+  }]); 

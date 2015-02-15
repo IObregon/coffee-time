@@ -8,12 +8,10 @@ angular.module('MyApp')
         login: function(persona) {
           return $http.post('/api/login', persona)
             .success(function(data) {
-              console.log(data);
               $rootScope.currentUser = data;
               $location.path('/');
             })
             .error(function() {
-      
             });
         },
         signup: function(persona) {
@@ -29,7 +27,7 @@ angular.module('MyApp')
         logout: function() {
           return $http.get('/api/logout').success(function() {
             $rootScope.currentUser = null;
-            $cookieStore.remove('persona');
+            $cookieStore.remove('user');
           });
         }
       };
