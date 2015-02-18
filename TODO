@@ -4,19 +4,24 @@
 
 *** Crear servidor con funciones minimas de parseo JSON extendido
 
+++*** Dar de alta personas
+++** Crear direccion POST /api/persona
+++** Crear vista.
+
+
+++*** Sistema de acceso restringido
+++** Crear Login
+++** Paginas solo visibles por gente logueada con permisos
+* Al arrancar el servidor de node si no existe el usuario admin crearlo nuevo con password por defecto.
+* El administrador tiene funciones extra como crear Personas y consumiciones.
+
+
 *** Dar de alta consumiciones
 ** Crear direccion POST /api/consumicion
 ** Crear vista.
 
-*** Dar de alta personas
-** Crear direccion POST /api/persona
-** Crear vista.
 
-*** Sistema de acceso restringido
-** Crear Login
-** Paginas solo visibles por gente logueada con permisos
-* Al arrancar el servidor de node si no existe el usuario admin crearlo nuevo con password por defecto.
-* El administrador tiene funciones extra como crear Personas y consumiciones.
+
 
 *** Ingresar dinero
 ** Crear direccion POST /api/ingreso
@@ -45,10 +50,11 @@
 ***************ENTIDADES****************
 ****************************************
 
-Personas: {Nombre, Balance, NBajada, NPagado}
-Gastos: {|Persona|, Fecha, |Cosumicion|}
-Ingresos: {|Persona|, Cantidad, Fecha}
+Persona: {Nombre, Balance, NBajada, NPagado}
 Consumicion: {Nombre, Tipo, Precio}
+Gasto: {|Persona|, Fecha, |Cosumicion|}
+Ingreso: {|Persona|, Cantidad, Fecha}
+
 Real: {Precio, Fecha}
 
 
