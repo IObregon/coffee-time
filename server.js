@@ -12,6 +12,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var bcrypt = require('bcryptjs');
 var Persona = require('./models/Persona.js');
+var Consumicion = require('./models/Consumicion.js');
 
 var configDB = require('./config/database.js');
 
@@ -92,6 +93,19 @@ app.post('/api/signup', function(req, res, next) {
 app.get('/api/logout', function(req, res, next) {
   req.logout();
   res.send(200);
+});
+
+app.post('/api/consumicion', function(req, res ,next){
+	console.log("guardo");
+	var consumicion = new Consumicion({
+		nombre : req.body.nombre,
+		tipo : req.body.tipo,
+		precio : req.body.precio
+	});
+	consumicion.save(function(err){
+		if (err) return next(err);
+		res.send(200);
+	});
 });
 
 app.get('*', function(req, res) {
