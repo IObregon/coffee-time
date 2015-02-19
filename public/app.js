@@ -16,7 +16,7 @@ angular.module('Coffee-time', ['ngRoute','ngResource','ngCookies'])
 			})
 			.when('/nuevaConsumicion', {
 				templateUrl: 'views/nuevaConsumicion.html',
-				controller: 'nuevaConsumicionCtrl.js'
+				controller: 'NuevaConsuCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'

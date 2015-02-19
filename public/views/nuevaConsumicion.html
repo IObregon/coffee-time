@@ -4,24 +4,25 @@
 			<div class="panel-body">
 				<h2 class="text-center">Nueva Consumicion</h2>
 
-				<form ng-app="myApp" ng-controller="MainCtrl">
+				<form ng-app="Coffee-time" ng-submit="nuevaConsumicion()">
 					<div class="form-group">
 						<label for="Nombre">Nombre: </label>
-						<input type="text" class="form-control input-lg" ng-model="Nombre" id="Nombre">
+						<input type="text" class="form-control input-lg" ng-model="Consumicion.nombre" id="Nombre">
 					</div>
 					<div class="form-group">
 						<label for="Tipo">Tipo</label>
-						<select ng-model="Tipo" class="form-control input-lg">
+						<select ng-model="Consumicion.tipo" class="form-control input-lg">
 							<option>Bebida</option>
 							<option>Comida</option>
 						</select>
 					</div>
 					<div class="form-group">
 						<label for="Precio">Precio</label>
-						<input type="number" class="form-control input-lg" ng-model="Precio" id="Precio">
+						<input type="number" class="form-control input-lg" ng-model="Consumicion.precio" id="Precio">
 					</div>
+					<button type ="submit" class="btn btn-lg btn-block btn-success" ng-click("alert('funciono');">Crear</button>
 				</form>
-				<button class="btn btn-lg btn-block btn-success" >Crear</button>
+				
 			</div>
 		</div>
 	</div>

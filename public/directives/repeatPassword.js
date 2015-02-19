@@ -1,4 +1,4 @@
-angular.module('MyApp')
+angular.module('Coffee-time')
   .directive('repeatPassword', function() {
     return {
       require: 'ngModel',
