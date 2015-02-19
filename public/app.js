@@ -1,4 +1,4 @@
-angular.module('MyApp', ['ngRoute','ngResource','ngCookies'])
+angular.module('Coffee-time', ['ngRoute','ngResource','ngCookies'])
   .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $locationProvider.html5Mode(true);
     	$routeProvider
@@ -14,7 +14,11 @@ angular.module('MyApp', ['ngRoute','ngResource','ngCookies'])
 				templateUrl: 'views/signup.html',
 				controller: 'SignupCtrl'
 			})
-				.otherwise({
+			.when('/nuevaConsumicion', {
+				templateUrl: 'views/nuevaConsumicion.html',
+				controller: 'nuevaConsumicionCtrl.js'
+			})
+			.otherwise({
 				redirectTo: '/'
 			});
 

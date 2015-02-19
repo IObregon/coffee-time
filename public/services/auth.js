@@ -1,4 +1,4 @@
-angular.module('MyApp')
+angular.module('Coffee-time')
   .factory('Auth', ['$http', '$location', '$rootScope', '$cookieStore',
     function($http, $location, $rootScope, $cookieStore) {
       $rootScope.currentUser = $cookieStore.get('persona');

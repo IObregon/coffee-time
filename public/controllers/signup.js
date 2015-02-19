@@ -1,4 +1,4 @@
-angular.module('MyApp')
+angular.module('Coffee-time')
   .controller('SignupCtrl', ['$scope', 'Auth', function($scope, Auth) {
     $scope.signup = function() {
       Auth.signup({
