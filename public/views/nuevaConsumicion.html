@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row">
+		<div class="center-form panel">
+			<div class="panel-body">
+				<h2 class="text-center">Nueva Consumicion</h2>
+
+				<form ng-app="myApp" ng-controller="MainCtrl">
+					<div class="form-group">
+						<label for="Nombre">Nombre: </label>
+						<input type="text" class="form-control input-lg" ng-model="Nombre" id="Nombre">
+					</div>
+					<div class="form-group">
+						<label for="Tipo">Tipo</label>
+						<select ng-model="Tipo" class="form-control input-lg">
+							<option>Bebida</option>
+							<option>Comida</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="Precio">Precio</label>
+						<input type="number" class="form-control input-lg" ng-model="Precio" id="Precio">
+					</div>
+				</form>
+				<button class="btn btn-lg btn-block btn-success" >Crear</button>
+			</div>
+		</div>
+	</div>
+</div>
