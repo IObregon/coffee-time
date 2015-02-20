@@ -1,13 +1,14 @@
 ***************
 *****TODOS*****
 ***************
-
-*** Crear servidor con funciones minimas de parseo JSON extendido
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DONE++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++*** Crear servidor con funciones minimas de parseo JSON extendido
 
 ++*** Dar de alta personas
 ++** Crear direccion POST /api/persona
 ++** Crear vista.
-
 
 ++*** Sistema de acceso restringido
 ++** Crear Login
@@ -15,19 +16,21 @@
 * Al arrancar el servidor de node si no existe el usuario admin crearlo nuevo con password por defecto.
 * El administrador tiene funciones extra como crear Personas y consumiciones.
 
+++*** Dar de alta consumiciones
+++** Crear direccion POST /api/consumicion
+++** Crear vista.
 
-*** Dar de alta consumiciones
-** Crear direccion POST /api/consumicion
-** Crear vista.
 
-
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DONE++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 *** Ingresar dinero
 ** Crear direccion POST /api/ingreso
 ** Crear vista.
-** Crear direccion GET /api/ingresos  Devuelve todos los ingresos de una persona
-** Crear direccion DELETE /api/ingreso
+** Crear direccion GET /api/ingresos/:id  Devuelve todos los ingresos de una persona
+** Crear direccion DELETE /api/ingreso/:id
 ** Crear vista.
 
 *** Consumir
@@ -39,10 +42,15 @@
 ** Crear vista.
 
 *** 'Pagar'
-** Implementar algoritmo que elija entre los apuntados al cafe a quien le toca pagar.
+** Implementar algoritmo que elija entre los apuntados al cafe de ese dia a quien le toca pagar.
 ** Crear direccion GET /api/pago Devuelve la lista de lo que hay que pedir, cuanto es el total estimado y a quien le toca pagar.
 ** Crear vista.
 ** Crear direccion POST /api/pago Introduccir cuanto ha sido el pago correcto del dia.
+
+*** 'Index'
+** Muestra quienes bajan hoy al cafe, que han pedido, total estimado y el boton para añadir el pago exacto (cuanto fue).
+** Muestra una lista de todas las personas, sus ultimos X 'movimientos' y su balance economico.
+** Mostrar lista con el porcentaje de "te toca pagar".
 
 *** Extras
 
