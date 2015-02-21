@@ -20,12 +20,23 @@
 ++** Crear direccion POST /api/consumicion
 ++** Crear vista.
 
+*** Consumir
+++** Crear direccion POST /api/consumicion
+++** Crear vista.
+
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DONE++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ** Paginas solo visibles por gente logueada con permisos
+
+*** Consumir
+* Crear funcion para invitar.
+** Crear direccion GET /api/consumicones  Devuelve todos los ingresos de una persona.
+** Crear direccion DELETE /api/ingreso .
+** Crear vista.
+* Si ya has consumido hoy, te muestra tu consumicion y te permite modificarla.
 
 *** Ingresar dinero
 ** Crear direccion POST /api/ingreso
@@ -34,13 +45,7 @@
 ** Crear direccion DELETE /api/ingreso/:id
 ** Crear vista.
 
-*** Consumir
-** Crear direccion POST /api/consumicion
-** Crear vista.
-* Crear funcion para invitar.
-** Crear direccion GET /api/consumicones  Devuelve todos los ingresos de una persona.
-** Crear direccion DELETE /api/ingreso
-** Crear vista.
+
 
 *** 'Pagar'
 ** Implementar algoritmo que elija entre los apuntados al cafe de ese dia a quien le toca pagar.
