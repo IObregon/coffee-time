@@ -13,6 +13,7 @@ var session      = require('express-session');
 var bcrypt = require('bcryptjs');
 var Persona = require('./models/Persona.js');
 var Consumicion = require('./models/Consumicion.js');
+var Gasto = require('./models/Gasto.js');
 
 var configDB = require('./config/database.js');
 
@@ -106,6 +107,18 @@ app.post('/api/consumicion', function(req, res ,next){
 		if (err) return next(err);
 		res.send(200);
 	});
+});
+
+app.post('/api/gasto', function(req, res ,next){
+  console.log(req.cookies.user);
+  var gasto = new Gasto({
+    persona : req.cookies.user._id,
+    consumicion: req.body.consumicion._id
+  });
+  gasto.save(function(err){
+    if (err) return next(err);
+    res.send(200);
+  });
 });
 
 app.get('*', function(req, res) {

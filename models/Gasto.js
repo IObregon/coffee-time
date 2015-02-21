@@ -8,7 +8,7 @@ var Schema = require('mongoose').Schema;
 var gastoSchema = new mongoose.Schema({
 	persona: { type: Schema.ObjectId, ref: 'Persona' },
 	fecha: { type: Date, default: Date.now },
-	Consumicion { type: Schema.ObjectId, ref: 'Consumicion'}
+	consumicion: { type: Schema.ObjectId, ref: 'Consumicion'}
 });
 
 module.exports = mongoose.model('Gasto', gastoSchema);
