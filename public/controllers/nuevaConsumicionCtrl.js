@@ -1,7 +1,7 @@
 angular.module('Coffee-time')
   .controller('NuevaConsuCtrl', ['$scope', '$http', function($scope, $http) {
 	  $scope.nuevaConsumicion = function(){
-	  	alert("Por lo menos me llaman");
+	  	if(!$scope.Consumicion.tipo) $scope.Consumicion.tipo = "Bebida";
 	  	$http.post('/api/consumicion', $scope.Consumicion)
 	  	.success(function(data, status, headers, config){
 	  		$scope.Consumicion = {};
@@ -12,18 +12,3 @@ angular.module('Coffee-time')
 	  	}
 }]);
 
-
-
-/*
-$scope.crearCliente = function(){		
-		$http.post('/api/clientes', $scope.Cliente)
-		.success(function(data, status, headers, config){
-			$scope.message = data;	
-			$scope.Cliente = {};
-			$location.path('/');
-		})
-		.error(function(data, status, headers, config){
-			altert(data);
-		});
-	}
-}]);*/
