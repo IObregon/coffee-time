@@ -82,8 +82,8 @@ app.post('/api/signup', function(req, res, next) {
     password: req.body.password,
     nombre: req.body.nombre,
     balance: 0,
-	nBajadas: 0,
-	NPagado: 0
+    nBajadas: 0,
+    NPagado: 0
   });
   persona.save(function(err) {
     if (err) return next(err);
@@ -97,7 +97,6 @@ app.get('/api/logout', function(req, res, next) {
 });
 
 app.post('/api/consumicion', function(req, res ,next){
-	console.log("guardo");
 	var consumicion = new Consumicion({
 		nombre : req.body.nombre,
 		tipo : req.body.tipo,
@@ -110,7 +109,6 @@ app.post('/api/consumicion', function(req, res ,next){
 });
 
 app.get('/api/consumicion/:tipo', function(req, res, next){
-  console.log(req.params.tipo);
   Consumicion.find({tipo: req.params.tipo}, function(err, result){
     if(err) res.send(err);
     res.send(result);
@@ -118,10 +116,9 @@ app.get('/api/consumicion/:tipo', function(req, res, next){
 });
 
 app.post('/api/gasto', function(req, res ,next){
-  console.log(req.cookies.user);
   var gasto = new Gasto({
     persona : req.cookies.user._id,
-    consumicion: req.body.consumicion._id
+    consumicion: req.body.Consumicion._id
   });
   gasto.save(function(err){
     if (err) return next(err);
