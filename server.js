@@ -109,6 +109,14 @@ app.post('/api/consumicion', function(req, res ,next){
 	});
 });
 
+app.get('/api/consumicion/:tipo', function(req, res, next){
+  console.log(req.params.tipo);
+  Consumicion.find({tipo: req.params.tipo}, function(err, result){
+    if(err) res.send(err);
+    res.send(result);
+  })
+});
+
 app.post('/api/gasto', function(req, res ,next){
   console.log(req.cookies.user);
   var gasto = new Gasto({
