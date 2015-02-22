@@ -24,6 +24,10 @@
 ++** Crear direccion POST /api/consumicion
 ++** Crear vista.
 
+*** Ingresar dinero
+++** Crear direccion POST /api/ingreso
+++** Crear vista.
+
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DONE++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -39,8 +43,6 @@
 * Si ya has consumido hoy, te muestra tu consumicion y te permite modificarla.
 
 *** Ingresar dinero
-** Crear direccion POST /api/ingreso
-** Crear vista.
 ** Crear direccion GET /api/ingresos/:id  Devuelve todos los ingresos de una persona
 ** Crear direccion DELETE /api/ingreso/:id
 ** Crear vista.
