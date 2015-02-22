@@ -117,9 +117,16 @@ app.get('/api/consumicion/:tipo', ensureAuthenticated, function(req, res, next){
 });
 
 app.post('/api/gasto', ensureAuthenticated, function(req, res ,next){
+  var consu;
+  if(req.body.Consumicion2){
+    consu = req.body.Consumicion2._id
+  }else {
+     consu = null
+  }
   var gasto = new Gasto({
     persona : req.user._id,
-    consumicion: req.body.Consumicion._id
+    consumicion: req.body.Consumicion._id,
+    consumicion2: consu
   });
   gasto.save(function(err){
     if (err) return next(err);
