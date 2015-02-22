@@ -9,3 +9,5 @@ var ingresoSchema = new Schema({
 	fecha: { type: Date, default: Date.now },
 	cantidad: Number
 });
+
+module.exports = mongoose.model('Ingreso', ingresoSchema);
