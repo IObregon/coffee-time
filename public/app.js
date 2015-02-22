@@ -22,6 +22,10 @@ angular.module('Coffee-time', ['ngRoute','ngResource','ngCookies'])
 				templateUrl: 'views/nuevoGasto.html',
 				controller: 'NuevoGastoCtrl'
 			})
+			.when('/nuevoIngreso', {
+				templateUrl: 'views/nuevoIngreso.html',
+				controller: 'NuevoIngresoCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
@@ -29,4 +33,15 @@ angular.module('Coffee-time', ['ngRoute','ngResource','ngCookies'])
 
 
 
-  }]);
+  }])
+  .run(function($rootScope, $location) {
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+      if ($rootScope.currentUser == null) {
+        // no logged user, redirect to /login
+        if ( next.templateUrl === "views/home.html" || next.templateUrl === "views/signup.html") {
+        } else {
+          $location.path("/login");
+        }
+      }
+    });
+  });

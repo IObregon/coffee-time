@@ -97,7 +97,7 @@ app.get('/api/logout', function(req, res, next) {
   res.send(200);
 });
 
-app.post('/api/consumicion', function(req, res ,next){
+app.post('/api/consumicion', ensureAuthenticated, function(req, res ,next){
 	var consumicion = new Consumicion({
 		nombre : req.body.nombre,
 		tipo : req.body.tipo,
@@ -109,16 +109,16 @@ app.post('/api/consumicion', function(req, res ,next){
 	});
 });
 
-app.get('/api/consumicion/:tipo', function(req, res, next){
+app.get('/api/consumicion/:tipo', ensureAuthenticated, function(req, res, next){
   Consumicion.find({tipo: req.params.tipo}, function(err, result){
     if(err) res.send(err);
     res.send(result);
   })
 });
 
-app.post('/api/gasto', function(req, res ,next){
+app.post('/api/gasto', ensureAuthenticated, function(req, res ,next){
   var gasto = new Gasto({
-    persona : req.cookies.user._id,
+    persona : req.user._id,
     consumicion: req.body.Consumicion._id
   });
   gasto.save(function(err){
@@ -127,10 +127,10 @@ app.post('/api/gasto', function(req, res ,next){
   });
 });
 
-app.post('/api/ingreso', function(req, res ,next){
+app.post('/api/ingreso', ensureAuthenticated, function(req, res ,next){
   var ingreso = new Ingreso({
-    persona : req.cookies.user._id,
-    cantidad : req.body.cantidad
+    persona : req.user._id,
+    cantidad : req.body.Cantidad
   });
   ingreso.save(function(err){
     if (err) return next(err);
