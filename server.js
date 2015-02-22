@@ -14,6 +14,7 @@ var bcrypt = require('bcryptjs');
 var Persona = require('./models/Persona.js');
 var Consumicion = require('./models/Consumicion.js');
 var Gasto = require('./models/Gasto.js');
+var Ingreso = require('./models/Ingreso.js');
 
 var configDB = require('./config/database.js');
 
@@ -121,6 +122,17 @@ app.post('/api/gasto', function(req, res ,next){
     consumicion: req.body.Consumicion._id
   });
   gasto.save(function(err){
+    if (err) return next(err);
+    res.send(200);
+  });
+});
+
+app.post('/api/ingreso', function(req, res ,next){
+  var ingreso = new Ingreso({
+    persona : req.cookies.user._id,
+    cantidad : req.body.cantidad
+  });
+  ingreso.save(function(err){
     if (err) return next(err);
     res.send(200);
   });
