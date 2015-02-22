@@ -5,7 +5,7 @@ var Schema = require('mongoose').Schema;
 //Gasto: {|Persona|, Fecha, |Cosumicion|}
 
 
-var gastoSchema = new mongoose.Schema({
+var gastoSchema = new Schema({
 	persona: { type: Schema.ObjectId, ref: 'Persona' },
 	fecha: { type: Date, default: Date.now },
 	consumicion: { type: Schema.ObjectId, ref: 'Consumicion'}
