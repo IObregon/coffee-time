@@ -22,7 +22,7 @@ angular.module('Coffee-time')
               })
             .error(function(response) {
               
-            })
+            });
         },
         logout: function() {
           return $http.get('/api/logout').success(function() {

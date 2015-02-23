@@ -8,22 +8,22 @@ angular.module('Coffee-time')
 	  	.error(function(data, status, header, config){
 	  		alert(data);
 	  	});
-	  	}
+	  	};
 
 	  $scope.getConsu = function(num){
 	  	if(num===1){
 	  		$http.get('/api/consumicion/'+$scope.tipo)
 	  		.success(function(data, status, header, config){
 	  			$scope.data = data;	
-	  		})
+	  		});
 
 	  	}else if(num===2){
 	  		$http.get('/api/consumicion/'+$scope.tipo2)
 	  		.success(function(data, status, header, config){
 	  			$scope.data2 = data;
-	  	})
+	  	});
 	  	}
-	  }
+	  };
 	  $scope.tipo="Bebida";
 	  $scope.tipo2="Comida";
 	 $scope.getConsu(1);

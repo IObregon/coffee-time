@@ -8,5 +8,5 @@ angular.module('Coffee-time')
 	  	.error(function(data, status, header, config){
 	  		alert(data);
 	  	});
-	  	}
+	  	};
 }]);	  	

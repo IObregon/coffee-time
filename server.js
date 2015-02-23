@@ -113,15 +113,15 @@ app.get('/api/consumicion/:tipo', ensureAuthenticated, function(req, res, next){
   Consumicion.find({tipo: req.params.tipo}, function(err, result){
     if(err) res.send(err);
     res.send(result);
-  })
+  });
 });
 
 app.post('/api/gasto', ensureAuthenticated, function(req, res ,next){
   var consu;
   if(req.body.Consumicion2){
-    consu = req.body.Consumicion2._id
+    consu = req.body.Consumicion2._id;
   }else {
-     consu = null
+     consu = null;
   }
   var gasto = new Gasto({
     persona : req.user._id,
