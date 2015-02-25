@@ -64,8 +64,11 @@ app.use(passport.session());
 
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) next();
-  else res.send(401);
+  if (req.isAuthenticated()){
+	next();
+  }else{
+	res.send(401).json({error: 'Not authenticated user'}); 
+  } 
 }
 
 app.get('/', function(req, res){
