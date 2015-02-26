@@ -127,7 +127,7 @@ app.post('/api/gasto', ensureAuthenticated, function(req, res ,next){
      consu = null;
   }
   var gasto = new Gasto({
-    persona : req.user._id,
+    _creador : req.user._id,
     consumicion: req.body.Consumicion._id,
     consumicion2: consu
   });
@@ -139,7 +139,7 @@ app.post('/api/gasto', ensureAuthenticated, function(req, res ,next){
 
 app.post('/api/ingreso', ensureAuthenticated, function(req, res ,next){
   var ingreso = new Ingreso({
-    persona : req.user._id,
+    _creador : req.user._id,
     cantidad : req.body.Cantidad
   });
   ingreso.save(function(err){

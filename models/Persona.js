@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+var Schema = require('mongoose').Schema;
 
 //Personas: {Nombre, Balance, NBajada, NPagado}
 var personaSchema = new mongoose.Schema({
@@ -8,7 +9,9 @@ var personaSchema = new mongoose.Schema({
 	nombre: String,
 	balance: Number,
 	nBajadas: Number,
-	NPagado: Number
+	NPagado: Number,
+	gastos: [{ type: Schema.ObjectId, ref: 'Gastos' }],
+	ingresos: [{ type: Schema.ObjectId, ref: 'Ingreso' }]
 });
 
 personaSchema.pre('save', function(next){
