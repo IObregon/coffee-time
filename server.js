@@ -129,7 +129,7 @@ app.get('/api/personas', function(req, res, next){
 	Persona.find()// Find all the Personas
 	.populate("gastos") // Populate Persona.gastos
 	.populate("ingresos") // Populate Persona.ingresos
-	.deepPopulate("gastos.consumicion", "gastos.consumicion2") // Populate Persona.gastos.consumicion & Persona.gastos.consumicion2
+	.deepPopulate(["gastos.consumicion", "gastos.consumicion2"]) // Populate Persona.gastos.consumicion & Persona.gastos.consumicion2
 	.exec(function(err, personas){
 		res.send(personas);
 	});

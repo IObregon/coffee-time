@@ -1,1 +1,34 @@
-adsdasdasdasd
+<div class="container">
+	<div class="row">
+		<div class="panel">
+			<div class="panel-body">
+			<table class="table table-resposive">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Bebida</th>
+					<th>Comida</th>
+					<th>Precio</th>
+				</tr>
+			</thead>
+			<tbody  ng-repeat="persona in personasBajan track by $index">
+				<tr ng-repeat="gasto in persona.gastos track by $index" >
+					<td> {{persona.nombre}}</td>
+					<td> {{gasto.consumicion.nombre}}</td>
+					<td> {{gasto.consumicion2.nombre}}</td>
+					<td> {{gasto.consumicion.precio + gasto.consumicion2.precio}}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr class="warning">
+					<td> TOTAL </td>
+					<td></td>
+					<td></td>
+					<td> {{total}}</td>
+				</tr>
+			</tfoot>
+			</table>
+			</div>
+		</div>
+	</div>
+</div>		

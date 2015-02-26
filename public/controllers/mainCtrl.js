@@ -1,4 +1,46 @@
 angular.module('Coffee-time')
-  .controller('MainCtrl', ['$scope', function($scope) {
+  .controller('MainCtrl', ['$scope','$http', function($scope, $http) {
+  		$http.get('/api/personas')
+  		.success(function(data,status, header, config){
+  			$scope.personas = data;
+  			$scope.personasBajan = [];
+  			data.forEach(function(persona){
+					Goes(persona)
+  			})
+  			getTotal();
+  		})
+  		.error(function(data, status, header, config){
+  			alert(data);
+  		});
 
+  		function Goes(persona){
+  			var today = new Date();
+  			if(persona.gastos){
+  				persona.gastos.forEach(function(gasto){
+  					if(gasto.fecha){
+  						var gastoDate  = new Date(gasto.fecha);
+  						if(+today.getDate() === +gastoDate.getDate()){
+  							if(+today.getMonth() === +gastoDate.getMonth()){
+  								if(+today.getFullYear() === +gastoDate.getFullYear()){
+  									$scope.personasBajan.push(persona);
+  								}
+  							}
+  						}	
+  					}		
+  				});
+  			}	
+  		}
+
+  		function getTotal(){
+  			$scope.total = 0;
+  			$scope.personasBajan.forEach(function(persona){
+  				persona.gastos.forEach(function(gasto){
+  					if(gasto.consumicion2){
+  						$scope.total = $scope.total + (gasto.consumicion.precio + gasto.consumicion2.precio);
+  					}else{
+  						$scope.total = $scope.total + (gasto.consumicion.precio );
+  					}
+  				})
+  			})
+  		}
   }]); 
