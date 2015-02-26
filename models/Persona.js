@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 var Schema = require('mongoose').Schema;
+var deepPopulate = require('mongoose-deep-populate');
+
 
 //Personas: {Nombre, Balance, NBajada, NPagado}
 var personaSchema = new mongoose.Schema({
@@ -10,9 +12,11 @@ var personaSchema = new mongoose.Schema({
 	balance: Number,
 	nBajadas: Number,
 	NPagado: Number,
-	gastos: [{ type: Schema.ObjectId, ref: 'Gastos' }],
+	gastos: [{ type: Schema.ObjectId, ref: 'Gasto' }],
 	ingresos: [{ type: Schema.ObjectId, ref: 'Ingreso' }]
 });
+
+personaSchema.plugin(deepPopulate);
 
 personaSchema.pre('save', function(next){
 	var persona = this;

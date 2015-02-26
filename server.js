@@ -11,11 +11,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var bcrypt = require('bcryptjs');
+
+// Imports the models
 var Persona = require('./models/Persona.js');
 var Consumicion = require('./models/Consumicion.js');
 var Gasto = require('./models/Gasto.js');
 var Ingreso = require('./models/Ingreso.js');
 
+// Config file for the database Access
 var configDB = require('./config/database.js');
 
 mongoose.connect(configDB.url);
@@ -32,6 +35,7 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+// Function for log in with passportjs
 passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, password, done) {
   Persona.findOne({ email: email }, function(err, persona) {
     if (err) return done(err);
@@ -44,6 +48,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, passw
   });
 }));
 
+// use morgan to log 
 app.use(morgan('dev'));
 
 app.use(cookieParser());
@@ -51,6 +56,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// If there is a logged user, get it into the cookie
 app.use(function(req, res, next) {
   if (req.user) {
     res.cookie('user', JSON.stringify(req.user));
@@ -62,7 +68,7 @@ app.use(session({ secret: 'estonoestansecreto'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+// Function to know if there a user authenticated or not
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()){
 	next();
@@ -117,6 +123,16 @@ app.get('/api/consumicion/:tipo', ensureAuthenticated, function(req, res, next){
     if(err) res.send(err);
     res.send(result);
   });
+});
+// Return all the 'Personas' with all the 'Gastos' and all the 'Ingresos'
+app.get('/api/personas', function(req, res, next){
+	Persona.find()// Find all the Personas
+	.populate("gastos") // Populate Persona.gastos
+	.populate("ingresos") // Populate Persona.ingresos
+	.deepPopulate("gastos.consumicion", "gastos.consumicion2") // Populate Persona.gastos.consumicion & Persona.gastos.consumicion2
+	.exec(function(err, personas){
+		res.send(personas);
+	});
 });
 
 app.post('/api/gasto', ensureAuthenticated, function(req, res ,next){
