@@ -153,6 +153,32 @@ app.post('/api/gasto', ensureAuthenticated, function(req, res ,next){
   });
 });
 
+app.get('/api/gastoHoy/:ID', function(req, res, next){
+	Gasto.findById(req.params.ID, function(err, result){
+		if(err){
+			res.status(500);
+			res.send(err);
+		}
+		console.log(req.params.ID);
+		console.log(result);
+		res.send(sameDate(result.fecha));
+	});
+});
+
+function sameDate(compareDate){
+	var today = new Date();
+	var dateToCompare  = new Date(compareDate);
+	var result = false;
+	if(+today.getDate() === +dateToCompare.getDate()){
+		if(+today.getMonth() === +dateToCompare.getMonth()){
+			if(+today.getFullYear() === +dateToCompare.getFullYear()){
+				result = true;
+			}
+		}
+	}	
+	return result;
+}
+
 app.post('/api/ingreso', ensureAuthenticated, function(req, res ,next){
   var ingreso = new Ingreso({
     _creador : req.user._id,

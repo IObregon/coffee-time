@@ -5,19 +5,20 @@ angular.module('Coffee-time')
   			$scope.personas = data;
   			$scope.personasBajan = [];
   			data.forEach(function(persona){
-					Goes(persona)
-  			})
+					Goes(persona);
+  			});
   			getTotal();
   		})
   		.error(function(data, status, header, config){
   			alert(data);
   		});
-
+		
+		// Put all the "Persona" who has today a "Gasto" in "personasBajan" array 
   		function Goes(persona){
   			var today = new Date();
   			if(persona.gastos){
   				persona.gastos.forEach(function(gasto){
-  					if(gasto.fecha){
+  					if(gasto){
   						var gastoDate  = new Date(gasto.fecha);
   						if(+today.getDate() === +gastoDate.getDate()){
   							if(+today.getMonth() === +gastoDate.getMonth()){
@@ -30,7 +31,8 @@ angular.module('Coffee-time')
   				});
   			}	
   		}
-
+		
+		// Returns the total for today
   		function getTotal(){
   			$scope.total = 0;
   			$scope.personasBajan.forEach(function(persona){
@@ -40,6 +42,6 @@ angular.module('Coffee-time')
   					}else{
   						$scope.total = $scope.total + (gasto.consumicion.precio );
   					}
-  				})
+  				});
   		}
   }]); 
