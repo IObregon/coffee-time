@@ -34,13 +34,12 @@ angular.module('Coffee-time')
   		function getTotal(){
   			$scope.total = 0;
   			$scope.personasBajan.forEach(function(persona){
-  				persona.gastos.forEach(function(gasto){
+				gasto = persona.gastos[0];
   					if(gasto.consumicion2){
   						$scope.total = $scope.total + (gasto.consumicion.precio + gasto.consumicion2.precio);
   					}else{
   						$scope.total = $scope.total + (gasto.consumicion.precio );
   					}
   				})
-  			})
   		}
   }]); 

@@ -12,11 +12,11 @@
 				</tr>
 			</thead>
 			<tbody  ng-repeat="persona in personasBajan track by $index">
-				<tr ng-repeat="gasto in persona.gastos track by $index" >
+				<tr >
 					<td> {{persona.nombre}}</td>
-					<td> {{gasto.consumicion.nombre}}</td>
-					<td> {{gasto.consumicion2.nombre}}</td>
-					<td> {{gasto.consumicion.precio + gasto.consumicion2.precio}}</td>
+					<td> {{persona.gastos[0].consumicion.nombre}}</td>
+					<td> {{persona.gastos[0].consumicion2.nombre}}</td>
+					<td> {{persona.gastos[0].consumicion.precio + persona.gastos[0].consumicion2.precio}}</td>
 				</tr>
 			</tbody>
 			<tfoot>
