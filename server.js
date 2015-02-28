@@ -154,14 +154,20 @@ app.post('/api/gasto', ensureAuthenticated, function(req, res ,next){
 });
 
 app.get('/api/gastoHoy/:ID', function(req, res, next){
-	Gasto.findById(req.params.ID, function(err, result){
+	Gasto.findOne({_id: req.params.ID}).populate("consumicion").populate("consumicion2").exec(function(err, result){
 		if(err){
 			res.status(500);
 			res.send(err);
 		}
 		console.log(req.params.ID);
 		console.log(result);
-		res.send(sameDate(result.fecha));
+    if(sameDate(result.fecha)){
+      res.send(result);
+    }else{
+      res.send(null)  
+    }
+    
+		
 	});
 });
 
