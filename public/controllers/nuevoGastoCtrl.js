@@ -1,47 +1,89 @@
 angular.module('Coffee-time')
-  .controller('NuevoGastoCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope) {
+  .controller('NuevoGastoCtrl', ['$scope', '$http','$rootScope', '$location', function($scope, $http, $rootScope, $location) {
+  	$scope.modo = "Alta";
 
-  	$http.get('/api/gastoHoy/' + $rootScope.currentUser.gastos[$rootScope.currentUser.gastos.length -1])
-  		.success(function(data, status, headers, config){
-  			if(data){
-  				alert("asdad" + data.consumicion2);
-  				$scope.Gasto = data;
-  				alert(data.consumicion2)
-  				if($scope.Gasto.consumicion2){
-  					alert("Soy un desayuno completo y nutritivo");
-  					alert($scope.combo)
-  				}
-  			}else{
-				$scope.tipo="Bebida";
-				$scope.tipo2="Comida";
-				$scope.getConsu(1);
-  			}
-  		})
-  		.error(function(data, status, headers, config){
-  			alert(data);
-  		})
-	  $scope.nuevogasto = function(){
-	  	$http.post('/api/gasto', $scope.Gasto)
+
+  	function nuevogasto(){
+	  	var Gasto = {};
+	  	Gasto.Consumicion = $scope.Consumicion;
+	  	Gasto.Consumicion2 = $scope.Consumicion2;
+	  	$http.post('/api/gasto', Gasto)
 	  	.success(function(data, status, headers, config){
 	  		$scope.Gasto = {};
+	  		$location.path('/');
 	  	})
 	  	.error(function(data, status, header, config){
 	  		alert(data);
 	  	});
-	  	};
+  	};
 
-	  $scope.getConsu = function(num){
+  	function modificarGasto(){
+	  	var Gasto = {};
+	  	if(typeof $scope.Consumicion == 'string'){
+	  		Gasto.Consumicion = $scope.gasto.Consumicion
+	  	}else{
+	  		Gasto.Consumicion = $scope.Consumicion;
+	  	}
+	  	if(typeof $scope.Consumicion2 == 'string'){
+	  		Gasto.Consumicion2 = $scope.gasto.Consumicion2
+	  	}else{
+	  		Gasto.Consumicion2 = $scope.Consumicion2;
+	  	}
+	  	$http.put('/api/gasto/' + $scope.gasto._id, Gasto )
+		.success(function(data, status, headers, config){
+			$location.path('/');
+		})
+		.error(function(data, status, headers, config){
+			alert(data);
+		});
+	};
+
+	$scope.send = function(){
+		if($scope.modo === "Alta"){
+			nuevogasto();
+		}else{
+			modificarGasto();
+		}
+	}
+
+  	$scope.getConsu = function(num){
 	  	if(num===1){
 	  		$http.get('/api/consumicion/'+$scope.tipo)
 	  		.success(function(data, status, header, config){
-	  			$scope.data = data;	
+	  			$scope.dataConsu1 = data;	
 	  		});
 
 	  	}else if(num===2){
 	  		$http.get('/api/consumicion/'+$scope.tipo2)
 	  		.success(function(data, status, header, config){
-	  			$scope.data2 = data;
+	  			$scope.dataConsu2 = data;
 	  	});
 	  	}
-	  };
+  	};
+
+  	function getGasto(cb){
+	  	$http.get('/api/gastoHoy/' + $rootScope.currentUser._id)
+  		.success(function(data, status, headers, config){
+			$scope.tipo="Bebida";
+			$scope.tipo2="Comida";
+			$scope.getConsu(1);
+			$scope.getConsu(2);
+			if(data){
+		  	$scope.gasto = data;
+				$scope.modo = "Modificacion";
+			cb(data);
+			}
+  		})
+  		.error(function(data, status, headers, config){
+  		});
+  	}
+
+
+	getGasto(function(data){
+		if(data.consumicion2){
+			$scope.combo="Desayuno";
+			$scope.Consumicion2 = data.consumicion2.nombre;
+		}
+		$scope.Consumicion = data.consumicion.nombre;
+	});
 }]);

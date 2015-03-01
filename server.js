@@ -103,7 +103,7 @@ app.post('/api/signup', function(req, res, next) {
 
 app.get('/api/logout', function(req, res, next) {
   req.logout();
-  res.send(200);
+  res.send('/api/login');
 });
 
 app.post('/api/consumicion', ensureAuthenticated, function(req, res ,next){
@@ -154,21 +154,44 @@ app.post('/api/gasto', ensureAuthenticated, function(req, res ,next){
 });
 
 app.get('/api/gastoHoy/:ID', function(req, res, next){
-	Gasto.findOne({_id: req.params.ID}).populate("consumicion").populate("consumicion2").exec(function(err, result){
-		if(err){
-			res.status(500);
-			res.send(err);
-		}
-		console.log(req.params.ID);
-		console.log(result);
-    if(sameDate(result.fecha)){
-      res.send(result);
-    }else{
-      res.send(null)  
+  Persona.findOne({_id: req.params.ID}, function(err, persona){
+    if(err){
+      res.next(err);
     }
-    
-		
-	});
+    Gasto.findOne({_id: persona.gastos[persona.gastos.length - 1]}).populate("consumicion").populate("consumicion2").exec(function(err, result){
+      if(err){
+          res.next(err);
+      }
+      if(result){
+        if(sameDate(result.fecha)){
+          res.send(result);
+        }else{
+          res.send(null)  
+        }
+      }else{
+        res.send();  
+      }
+      
+    });
+  });
+});
+
+app.put('/api/gasto/:idGasto', function(req, res, next){
+  console.log(req.params.idGasto);
+  var gasto = {};
+  if(typeof req.body.Consumicion !== 'undefined'){
+    gasto.consumicion = req.body.Consumicion._id
+  }
+  if(typeof req.body.Consumicion2 !== 'undefined'){
+    gasto.consumicion2 = req.body.Consumicion2._id
+  }else{
+    gasto.consumicion2 = null;
+  }
+  Gasto.findOneAndUpdate({_id : req.params.idGasto}, gasto, function(err){
+    if (err) next(err);
+    res.send();
+  });
+
 });
 
 function sameDate(compareDate){

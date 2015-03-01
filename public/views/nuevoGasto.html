@@ -3,8 +3,7 @@
 		<div class="center-form panel">
 			<div class="panel-body">
 				<h2 class="text-center">Nuevo Gasto</h2>
-				{{currentUser}}
-				<form ng-app="Coffee-time" ng-submit="nuevogasto()">
+				<form ng-app="Coffee-time" ng-submit="send()">
 					<div class="form-group">
 						<label for="Tipo">Tipo</label>
 						<select ng-model="combo" class="form-control input-lg" ng-change="getConsu(2)">
@@ -21,7 +20,7 @@
 					</div>
 					<div class="form-group">
 						<label for="Consumicion">Consumición</label>
-						<select required class="form-control input-lg" ng-options="dat.nombre for dat in data" ng-model="Gasto.Consumicion">
+						<select required class="form-control input-lg" ng-options="dat.nombre for dat in dataConsu1 track by dat.nombre" ng-model="Consumicion">
 						</select>
 					</div>
 					<div class="form-group"  ng-show="combo =='Desayuno'">
@@ -33,10 +32,11 @@
 					</div>
 					<div class="form-group" ng-show="combo =='Desayuno'">
 						<label for="Consumicion2">Consumición</label>
-						<select  class="form-control input-lg" ng-options="dat2.nombre for dat2 in data2" ng-model="Gasto.Consumicion2">
+						<select  class="form-control input-lg" ng-options="dat2.nombre for dat2 in dataConsu2 track by dat2.nombre" ng-model="Consumicion2">
 						</select>
 					</div>
-					<button type ="submit" class="btn btn-lg btn-block btn-success">Crear</button>
+					<button ng-show="modo =='Alta'" type ="submit" class="btn btn-lg btn-block btn-success">Crear</button>
+					<button ng-show="modo =='Modificacion'" type ="submit" class="btn btn-lg btn-block btn-success">Modificar</button>
 				</form>
 			</div>
 		</div>
