@@ -28,6 +28,7 @@ angular.module('Coffee-time')
           return $http.get('/api/logout').success(function() {
             $rootScope.currentUser = null;
             $cookieStore.remove('user');
+            $location.path('/login');   
           });
         }
       };
