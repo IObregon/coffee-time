@@ -15,6 +15,7 @@ ingresoSchema.post('save', function(next){
 	var ingreso = this;
 	Persona.findById(this._creador, function(err, persona){
 		persona.ingresos.push(ingreso);
+		persona.balance += ingreso.cantidad;
 		persona.save();
 	});
 });
