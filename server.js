@@ -21,7 +21,12 @@ var Ingreso = require('./models/Ingreso.js');
 // Config file for the database Access
 var configDB = require('./config/database.js');
 
-mongoose.connect(configDB.url);
+if(port == 80){
+  mongoose.connect(configDB.url);
+}else{
+  mongoose.connect(configDB.urlDev);
+}
+
 
 //require('./config/passport.js')(passport); // pass passport for configuration
 
@@ -228,4 +233,6 @@ app.use(function(err, req, res, next) {
   res.send(500, { message: err.message });
 });
 
-app.listen(port);
+app.listen(port, function(){
+  console.log('Listening to port: ' + port);
+});
