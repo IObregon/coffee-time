@@ -184,17 +184,27 @@ app.get('/api/gastoHoy/:ID', function(req, res, next){
 app.put('/api/gasto/:idGasto', function(req, res, next){
   console.log(req.params.idGasto);
   var gasto = {};
-  if(typeof req.body.Consumicion !== 'undefined'){
+ /*if(typeof req.body.Consumicion !== 'undefined'){
     gasto.consumicion = req.body.Consumicion._id
   }
   if(typeof req.body.Consumicion2 !== 'undefined'){
     gasto.consumicion2 = req.body.Consumicion2._id
   }else{
     gasto.consumicion2 = null;
-  }
-  Gasto.findOneAndUpdate({_id : req.params.idGasto}, gasto, function(err){
+  }*/
+  Gasto.findOne({_id : req.params.idGasto}, function(err, gastoViejo){
     if (err) next(err);
-    res.send();
+    if(req.body.Consumicion){
+      gastoViejo.consumicion = req.body.Consumicion._id
+    }
+    if(req.body.Consumicion2){
+      gastoViejo.consumicion2 = req.body.Consumicion2._id
+    }
+    console.log("soy el gasto en el server " + gastoViejo)
+    gastoViejo.update(function(err){
+      if(err) next(err);
+      res.send();  
+    })
   });
 
 });
