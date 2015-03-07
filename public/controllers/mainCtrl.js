@@ -1,5 +1,5 @@
 angular.module('Coffee-time')
-  .controller('MainCtrl', ['$scope','$http', function($scope, $http) {
+  .controller('MainCtrl', ['$scope','$http', '$route', function($scope, $http, $route) {
   		$http.get('/api/personas')
   		.success(function(data,status, header, config){
         var bajas = 100;
@@ -17,6 +17,7 @@ angular.module('Coffee-time')
   			});
         $scope.index = paga ;
   			getTotal();
+        getBote();
   		})
   		.error(function(data, status, header, config){
   			alert(data);
@@ -41,6 +42,15 @@ angular.module('Coffee-time')
   			}	
   		}
 		
+      function getBote(){
+        $http.get('/api/bote')
+          .success(function(data,status, header, config){
+            $scope.Bote = data;
+          })
+          .error(function(data, status, header, config){
+            alert(data);
+          });
+      }
 		// Returns the total for today
   		function getTotal(){
   			$scope.total = 0;
@@ -53,4 +63,18 @@ angular.module('Coffee-time')
   					}
   				});
   		}
+
+      $scope.sendPago = function(cantidad){
+        var cant = {
+          cantidad : cantidad
+        };
+        $http.post('/api/pago', cant)
+        .success(function(data, status, headers, config){
+          $scope.cantidad = 0;
+          $route.reload();
+        })
+        .error(function(data, status, header, config){
+          alert(data);
+        });
+      };
   }]); 

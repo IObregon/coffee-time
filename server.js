@@ -17,6 +17,7 @@ var Persona = require('./models/Persona.js');
 var Consumicion = require('./models/Consumicion.js');
 var Gasto = require('./models/Gasto.js');
 var Ingreso = require('./models/Ingreso.js');
+var Pago = require('./models/Pago.js');
 
 // Config file for the database Access
 var configDB = require('./config/database.js');
@@ -111,7 +112,52 @@ app.get('/api/logout', function(req, res, next) {
   res.send('/api/login');
 });
 
-app.post('/api/consumicion', ensureAuthenticated, function(req, res ,next){
+app.post('/api/pago', ensureAuthenticated, function(req, res, next){
+  var pago = new Pago({
+    _creador : req.user._id,
+    cantidad : req.body.cantidad
+  });
+  pago.save(function(err){
+    if(err) next(err);
+    res.send(200);
+  });
+});
+
+function calculateBote(cb){
+  var gastosTotal = 0;
+  var ingresosTotal = 0;
+  var pagosTotal = 0;
+    Gasto.find(function(err, gastos){
+      gastos.forEach(function(gasto){
+        gastosTotal += gasto.total;
+      });
+      Ingreso.find(function(err, ingresos){
+        ingresos.forEach(function(ingreso){
+          ingresosTotal += ingreso.cantidad;
+        });
+      });
+      Pago.find(function(err, pagos){
+        pagos.forEach(function(pago){
+          pagosTotal += pago.cantidad;
+        })
+        console.log(ingresosTotal + " " + gastosTotal + " " + pagosTotal)
+        var bote = {
+          bote : ingresosTotal - gastosTotal,
+          boteReal : ingresosTotal - pagosTotal
+        };
+        console.log(bote);
+        cb(null, bote)
+    })
+    });
+}
+app.get('/api/bote', function(req, res, next){
+  calculateBote(function(err, bote){
+    res.send(bote)  
+  })
+  
+})
+
+app.post('/api/consumicion', ensureAuthenticated, function(req, res, next){
 	var consumicion = new Consumicion({
 		nombre : req.body.nombre,
 		tipo : req.body.tipo,

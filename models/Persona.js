@@ -13,7 +13,8 @@ var personaSchema = new mongoose.Schema({
 	nBajadas: Number,
 	NPagado: Number,
 	gastos: [{ type: Schema.ObjectId, ref: 'Gasto' }],
-	ingresos: [{ type: Schema.ObjectId, ref: 'Ingreso' }]
+	ingresos: [{ type: Schema.ObjectId, ref: 'Ingreso' }],
+	pagos: [{ type: Schema.ObjectId, ref: 'Pago' }]
 });
 
 personaSchema.plugin(deepPopulate);
