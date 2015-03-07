@@ -201,6 +201,25 @@ app.post('/api/gasto', ensureAuthenticated, function(req, res ,next){
   });
 });
 
+app.delete('/api/gasto/:id', ensureAuthenticated, function(req, res, next){
+  console.log(req.params.id);
+  Gasto.findOne({_id : req.params.id}, function(err, gasto){
+    Persona.findById(req.user._id, function(err, persona){
+    persona.gastos.pull(req.params.id);
+    persona.nBajadas -= 1;
+    persona.balance += gasto.total;
+    persona.save();
+    Gasto.remove({'_id' : req.params.id}, function(err){
+    if(err){
+      res.status(500);
+      res.send(err);
+    }
+    res.sendfile('./public/index.html');
+  });
+  });
+  });
+});
+
 app.get('/api/gastoHoy/:ID', function(req, res, next){
   Persona.findOne({_id: req.params.ID}, function(err, persona){
     if(err){

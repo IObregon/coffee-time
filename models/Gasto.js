@@ -45,6 +45,7 @@ gastoSchema.pre('update', function(next){
 
 
 
+
 var updateGastoTotal = function(gasto, cb){
 	var Consumiciones = [];
 	Consumiciones.push(gasto.consumicion); 

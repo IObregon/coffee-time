@@ -38,6 +38,16 @@ angular.module('Coffee-time')
 		});
 	}
 
+	$scope.eliminarGasto = function(){
+		$http.delete('/api/gasto/' + gasto._id)
+			.success(function(data){
+				$location.path('/');
+			})
+			.error(function(data, status, headers, config){
+				alert(data);
+			});
+	};
+
 	$scope.send = function(){
 		if($scope.modo === "Alta"){
 			nuevogasto();
