@@ -171,7 +171,7 @@ app.get('/api/gastoHoy/:ID', function(req, res, next){
         if(sameDate(result.fecha)){
           res.send(result);
         }else{
-          res.send(null)  
+          res.send(null);
         }
       }else{
         res.send();  
@@ -183,31 +183,39 @@ app.get('/api/gastoHoy/:ID', function(req, res, next){
 
 app.put('/api/gasto/:idGasto', function(req, res, next){
   console.log(req.params.idGasto);
-  var gasto = {};
- /*if(typeof req.body.Consumicion !== 'undefined'){
-    gasto.consumicion = req.body.Consumicion._id
-  }
-  if(typeof req.body.Consumicion2 !== 'undefined'){
-    gasto.consumicion2 = req.body.Consumicion2._id
-  }else{
-    gasto.consumicion2 = null;
-  }*/
   Gasto.findOne({_id : req.params.idGasto}, function(err, gastoViejo){
     if (err) next(err);
-    if(req.body.Consumicion){
-      gastoViejo.consumicion = req.body.Consumicion._id
+    if(typeof req.body.Consumicion == 'undefined'){
+       gastoViejo.consumicion = null;
+    }else{
+      gastoViejo.consumicion = req.body.Consumicion._id;
     }
-    if(req.body.Consumicion2){
-      gastoViejo.consumicion2 = req.body.Consumicion2._id
+    if(typeof req.body.Consumicion2 == 'undefined'){
+      gastoViejo.consumicion2 = null; 
+      
+    }else{
+      gastoViejo.consumicion2 = req.body.Consumicion2._id;
     }
-    console.log("soy el gasto en el server " + gastoViejo)
-    gastoViejo.update(function(err){
-      if(err) next(err);
-      res.send();  
-    })
+    restoreBalance(gastoViejo, function(err){
+      if(err) res.send(err);
+      gastoViejo.save(function(err){
+        if(err) next(err);
+       res.send();  
+      });
+    });
   });
-
 });
+
+function restoreBalance(gastoNuevo, cb){
+  Persona.findOne({_id: gastoNuevo._creador}, function(err, creador){
+    creador.balance += gastoNuevo.total;
+    creador.save(function(err){
+      if(err)cb(err);
+    });
+    cb(null);
+  });
+  
+}
 
 function sameDate(compareDate){
 	var today = new Date();

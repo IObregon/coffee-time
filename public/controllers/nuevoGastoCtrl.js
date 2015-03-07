@@ -15,17 +15,17 @@ angular.module('Coffee-time')
 	  	.error(function(data, status, header, config){
 	  		alert(data);
 	  	});
-  	};
+  	}
 
   	function modificarGasto(){
 	  	var Gasto = {};
 	  	if(typeof $scope.Consumicion == 'string'){
-	  		Gasto.Consumicion = $scope.gasto.Consumicion
+	  		Gasto.Consumicion = $scope.gasto.consumicion;
 	  	}else{
 	  		Gasto.Consumicion = $scope.Consumicion;
 	  	}
 	  	if(typeof $scope.Consumicion2 == 'string'){
-	  		Gasto.Consumicion2 = $scope.gasto.Consumicion2
+	  		Gasto.Consumicion2 = $scope.gasto.consumicion2;
 	  	}else{
 	  		Gasto.Consumicion2 = $scope.Consumicion2;
 	  	}
@@ -36,7 +36,7 @@ angular.module('Coffee-time')
 		.error(function(data, status, headers, config){
 			alert(data);
 		});
-	};
+	}
 
 	$scope.send = function(){
 		if($scope.modo === "Alta"){
@@ -44,7 +44,7 @@ angular.module('Coffee-time')
 		}else{
 			modificarGasto();
 		}
-	}
+	};
 
   	$scope.getConsu = function(num){
 	  	if(num===1){
@@ -69,7 +69,7 @@ angular.module('Coffee-time')
 			$scope.getConsu(1);
 			$scope.getConsu(2);
 			if(data){
-		  	$scope.gasto = data;
+		  		$scope.gasto = data;
 				$scope.modo = "Modificacion";
 			cb(data);
 			}
