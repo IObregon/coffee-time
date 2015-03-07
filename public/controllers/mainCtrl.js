@@ -9,9 +9,9 @@ angular.module('Coffee-time')
   			$scope.personasBajan = [];
   			data.forEach(function(persona){
 					Goes(persona);
-          var porcentaje = persona.NPagado / persona.NBajada
+          var porcentaje = persona.NPagado / persona.NBajada;
           if(porcentaje < bajas){
-            bajas = porcentaje
+            bajas = porcentaje;
             paga = i;
           } 
   			});

@@ -15,7 +15,7 @@ pagoSchema.post('save', function(next){
 	var pago = this;
 	Persona.findById(this._creador, function(err, persona){
 		persona.pagos.push(pago);
-		persona.NPagado += 1
+		persona.NPagado += 1;
 		persona.save();
 	});
 });

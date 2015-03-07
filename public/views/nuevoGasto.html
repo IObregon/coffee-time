@@ -20,7 +20,7 @@
 					</div>
 					<div class="form-group">
 						<label for="Consumicion">Consumición</label>
-						<select required class="form-control input-lg" ng-options="dat.nombre for dat in dataConsu1 track by dat.nombre" ng-model="Consumicion">
+						<select required class="form-control input-lg" ng-options="(dat.nombre + ' ' + dat.precio + '€') for dat in dataConsu1 track by dat.nombre" ng-model="Consumicion">
 						</select>
 					</div>
 					<div class="form-group"  ng-show="combo =='Desayuno'">
@@ -32,7 +32,7 @@
 					</div>
 					<div class="form-group" ng-show="combo =='Desayuno'">
 						<label for="Consumicion2">Consumición</label>
-						<select  class="form-control input-lg" ng-options="dat2.nombre for dat2 in dataConsu2 track by dat2.nombre" ng-model="Consumicion2">
+						<select  class="form-control input-lg" ng-options="(dat2.nombre + ' ' + dat2.precio + '€') for dat2 in dataConsu2 track by dat2.nombre" ng-model="Consumicion2">
 						</select>
 					</div>
 					<button ng-show="modo =='Alta'" type ="submit" class="btn btn-lg btn-block btn-success">Crear</button>

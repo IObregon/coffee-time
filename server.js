@@ -139,23 +139,20 @@ function calculateBote(cb){
       Pago.find(function(err, pagos){
         pagos.forEach(function(pago){
           pagosTotal += pago.cantidad;
-        })
-        console.log(ingresosTotal + " " + gastosTotal + " " + pagosTotal)
+        });
         var bote = {
           bote : ingresosTotal - gastosTotal,
           boteReal : ingresosTotal - pagosTotal
         };
-        console.log(bote);
-        cb(null, bote)
-    })
+        cb(null, bote);
+    });
     });
 }
 app.get('/api/bote', function(req, res, next){
   calculateBote(function(err, bote){
-    res.send(bote)  
-  })
-  
-})
+    res.send(bote);
+  });
+});
 
 app.post('/api/consumicion', ensureAuthenticated, function(req, res, next){
 	var consumicion = new Consumicion({
