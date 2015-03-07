@@ -12,7 +12,7 @@
 				</tr>
 			</thead>
 			<tbody  ng-repeat="persona in personasBajan track by $index">
-				<tr >
+				<tr ng-class="{info: $index==index}">
 					<td> {{persona.nombre}}</td>
 					<td> {{persona.gastos[0].consumicion.nombre}}</td>
 					<td> {{persona.gastos[0].consumicion2.nombre}}</td>
@@ -27,6 +27,30 @@
 					<td> {{total}}</td>
 				</tr>
 			</tfoot>
+			</table>
+			</div>
+
+			<div class="panel-body">
+			<table class="table table-resposive">
+			{{index}}
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Balance</th>
+					<th>Bajado</th>
+					<th>Pagado</th>
+					<th>Porcentaje</th>
+				</tr>
+			</thead>
+			<tbody  ng-repeat="persona in personas track by $index">
+				<tr >
+					<td> {{persona.nombre}}</td>
+					<td> {{persona.balance}}</td>
+					<td> {{persona.nBajadas}}</td>
+					<td> {{persona.NPagado}}</td>
+					<td> {{(persona.NPagado / persona.nBajadas) * 100 || 0}}
+				</tr>
+			</tbody>
 			</table>
 			</div>
 		</div>

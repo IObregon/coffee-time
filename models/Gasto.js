@@ -28,7 +28,8 @@ gastoSchema.post('save', function(next){
 	Persona.findById(this._creador, function(err, persona){
 		if(persona.gastos.indexOf(gasto._id) == -1){
 			persona.gastos.push(gasto);
-		} 
+			persona.nBajadas += 1;
+		}
 		persona.balance -= gasto.total;
 		persona.save();
 	});

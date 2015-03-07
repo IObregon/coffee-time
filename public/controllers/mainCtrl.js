@@ -2,11 +2,20 @@ angular.module('Coffee-time')
   .controller('MainCtrl', ['$scope','$http', function($scope, $http) {
   		$http.get('/api/personas')
   		.success(function(data,status, header, config){
+        var bajas = 100;
+        var i = 0;
+        var paga = 0;
   			$scope.personas = data;
   			$scope.personasBajan = [];
   			data.forEach(function(persona){
 					Goes(persona);
+          var porcentaje = persona.NPagado / persona.NBajada
+          if(porcentaje < bajas){
+            bajas = porcentaje
+            paga = i;
+          } 
   			});
+        $scope.index = paga ;
   			getTotal();
   		})
   		.error(function(data, status, header, config){
