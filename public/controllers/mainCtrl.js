@@ -9,13 +9,16 @@ angular.module('Coffee-time')
   			$scope.personasBajan = [];
   			data.forEach(function(persona){
 					Goes(persona);
-          var porcentaje = persona.NPagado / persona.NBajada;
-          if(porcentaje < bajas){
-            bajas = porcentaje;
-            paga = i;
-          } 
   			});
-        $scope.index = paga ;
+			$scope.personasBajan.forEach(function(persona){
+				var porcentaje = persona.NPagado / persona.nBajadas;
+				if(porcentaje < bajas){
+					bajas = porcentaje;
+					paga = i;
+					i++;
+				}
+			});
+			$scope.index = paga ;
   			getTotal();
         getBote();
   		})

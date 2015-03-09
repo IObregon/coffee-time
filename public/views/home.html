@@ -48,10 +48,10 @@
 			<tbody  ng-repeat="persona in personas track by $index">
 				<tr >
 					<td> {{persona.nombre}}</td>
-					<td> {{persona.balance}}</td>
+					<td> {{persona.balance | number : 2}}</td>
 					<td> {{persona.nBajadas}}</td>
 					<td> {{persona.NPagado}}</td>
-					<td> {{(persona.NPagado / persona.nBajadas) * 100 || 0}}
+					<td> {{(persona.NPagado / persona.nBajadas) * 100 | number : 2 || 0}}
 				</tr>
 			</tbody>
 			</table>
