@@ -123,6 +123,25 @@ app.post('/api/pago', ensureAuthenticated, function(req, res, next){
   });
 });
 
+app.get('/api/pago', function(req, res, next){
+	var date = new Date;
+	var options = {}
+    date.setHours(0, 0, 0, 0)
+    var endDate = new Date(date);
+    endDate.setHours(23, 59, 59, 59)
+	console.log(date);
+	console.log(endDate);
+	Pago.find({fecha: {$gte: date}}, function(err, data){
+		console.log(data);
+		if(data){
+			res.send(true);
+		}else{
+			res.send(false);
+		}
+		
+	})
+})
+
 function calculateBote(cb){
   var gastosTotal = 0;
   var ingresosTotal = 0;

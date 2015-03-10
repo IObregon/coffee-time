@@ -1,5 +1,8 @@
 angular.module('Coffee-time')
   .controller('MainCtrl', ['$scope','$http', '$route', function($scope, $http, $route) {
+		getLastPago(function(err, data){
+			$scope.PagadoYa = data;
+		});
   		$http.get('/api/personas')
   		.success(function(data,status, header, config){
         var bajas = 100;
@@ -44,6 +47,15 @@ angular.module('Coffee-time')
   				});
   			}	
   		}
+		function getLastPago(cb){
+			$http.get('/api/pago')
+				.success(function(data, status, header, config){
+					cb(null, data);
+				})
+				.error(function(data, status, header, config){
+					cb(data, null);
+				});
+		};
 		
       function getBote(){
         $http.get('/api/bote')
