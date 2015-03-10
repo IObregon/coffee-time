@@ -125,14 +125,10 @@ app.post('/api/pago', ensureAuthenticated, function(req, res, next){
 
 app.get('/api/pago', function(req, res, next){
 	var date = new Date;
-	var options = {}
     date.setHours(0, 0, 0, 0)
-    var endDate = new Date(date);
-    endDate.setHours(23, 59, 59, 59)
-	console.log(date);
-	console.log(endDate);
+    /*var endDate = new Date(date);
+    endDate.setHours(23, 59, 59, 59)*/
 	Pago.find({fecha: {$gte: date}}, function(err, data){
-		console.log(data);
 		if(data){
 			res.send(true);
 		}else{
