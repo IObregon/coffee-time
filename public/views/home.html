@@ -17,7 +17,7 @@
 					<td> {{persona.gastos[0].consumicion.nombre}}</td>
 					<td> {{persona.gastos[0].consumicion2.nombre}}</td>
 					<td> {{persona.gastos[0].consumicion.precio + persona.gastos[0].consumicion2.precio}}</td>
-					<td ng-if= "$index == index && currentUser && currentUser._id === persona._id">
+					<td ng-if= "$index === index && currentUser && currentUser._id === persona._id">
 						<input type="number"  min="0" step="any" class="input-xs" ng-model="Pago.cantidad" id="Pago.cantidad">
 						<button ng-click="sendPago(Pago.cantidad)">Enviar</button>
 					</td>

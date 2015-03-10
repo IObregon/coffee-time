@@ -15,8 +15,8 @@ angular.module('Coffee-time')
 				if(porcentaje < bajas){
 					bajas = porcentaje;
 					paga = i;
-					i++;
 				}
+			i++;
 			});
 			$scope.index = paga ;
   			getTotal();
