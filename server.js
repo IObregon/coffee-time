@@ -129,7 +129,7 @@ app.get('/api/pago', function(req, res, next){
     /*var endDate = new Date(date);
     endDate.setHours(23, 59, 59, 59)*/
 	Pago.find({fecha: {$gte: date}}, function(err, data){
-		if(data){
+		if(data.length > 0){
 			res.send(true);
 		}else{
 			res.send(false);
