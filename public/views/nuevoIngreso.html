@@ -7,7 +7,7 @@
 				<form ng-app="Coffee-time" ng-submit="nuevoingreso()">
 					<div class="form-group">
 						<label for="Cantidad">Cantidad</label>
-						<input type="number"  step="any" class="form-control input-lg" ng-model="Ingreso.Cantidad" id="Cantidad" required>
+						<input type="number"  step="any" min="-100" max="100" class="form-control input-lg" ng-model="Ingreso.Cantidad" id="Cantidad" required>
 						</select>
 					</div>
 					<button type ="submit" class="btn btn-lg btn-block btn-success">Ingresar</button>
