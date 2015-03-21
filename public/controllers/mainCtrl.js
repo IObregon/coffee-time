@@ -55,7 +55,7 @@ angular.module('Coffee-time')
 				.error(function(data, status, header, config){
 					cb(data, null);
 				});
-		};
+		}
 		
       function getBote(){
         $http.get('/api/bote')
@@ -70,7 +70,7 @@ angular.module('Coffee-time')
   		function getTotal(){
   			$scope.total = 0;
   			$scope.personasBajan.forEach(function(persona){
-				gasto = persona.gastos[0];
+				gasto = persona.gastos[persona.gastos.length - 1];
   					if(gasto.consumicion2){
   						$scope.total = $scope.total + (gasto.consumicion.precio + gasto.consumicion2.precio);
   					}else{
@@ -80,16 +80,18 @@ angular.module('Coffee-time')
   		}
 
       $scope.sendPago = function(cantidad){
-        var cant = {
-          cantidad : cantidad
-        };
-        $http.post('/api/pago', cant)
-        .success(function(data, status, headers, config){
-          $scope.cantidad = 0;
-          $route.reload();
-        })
-        .error(function(data, status, header, config){
-          alert(data);
-        });
+		  if(confirm("¿Estas seguro/a de que esto es lo que te ha cobrado el camarero/a?")){
+			var cant = {
+			  cantidad : cantidad
+			};
+			$http.post('/api/pago', cant)
+			.success(function(data, status, headers, config){
+			  $scope.cantidad = 0;
+			  $route.reload();
+			})
+			.error(function(data, status, header, config){
+			  alert(data);
+			});
+		  }
       };
   }]); 

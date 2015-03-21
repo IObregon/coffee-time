@@ -150,17 +150,17 @@ function calculateBote(cb){
         ingresos.forEach(function(ingreso){
           ingresosTotal += ingreso.cantidad;
         });
-      });
-      Pago.find(function(err, pagos){
-        pagos.forEach(function(pago){
-          pagosTotal += pago.cantidad;
-        });
-        var bote = {
-          bote : ingresosTotal - gastosTotal,
-          boteReal : ingresosTotal - pagosTotal
-        };
-        cb(null, bote);
-    });
+		  Pago.find(function(err, pagos){
+			pagos.forEach(function(pago){
+			  pagosTotal += pago.cantidad;
+			});
+			var bote = {
+			  bote : ingresosTotal - gastosTotal,
+			  boteReal : ingresosTotal - pagosTotal
+			};
+			cb(null, bote);
+		  });
+		});
     });
 }
 app.get('/api/bote', function(req, res, next){
