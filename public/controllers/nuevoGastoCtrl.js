@@ -39,7 +39,7 @@ angular.module('Coffee-time')
 	}
 
 	$scope.eliminarGasto = function(){
-		$http.delete('/api/gasto/' + gasto._id)
+		$http.delete('/api/gasto/' + $scope.gasto._id)
 			.success(function(data){
 				$location.path('/');
 			})
