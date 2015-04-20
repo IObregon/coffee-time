@@ -345,6 +345,12 @@ app.post('/api/ingreso', ensureAuthenticated, function(req, res, next) {
   });
 });
 
+app.get('/api/getHora', function(req, res, next){
+	var date = new Date();
+	var hora = (date.getHours() * 3600) + (date.getMinutes() * 60 );
+	res.send(200,hora);
+});
+
 app.get('*', function(req, res) {
   res.redirect('/#' + req.originalUrl);
 });

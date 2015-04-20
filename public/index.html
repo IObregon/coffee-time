@@ -29,7 +29,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li data-match-route="/$"><a href="/">Home</a></li>
-      <li data-match-route="/$/nuevoGasto"><a href="/nuevoGasto" ng-if="currentUser">Nuevo Gasto</a></li>
+      <li data-match-route="/$/nuevoGasto"><a href ng-click ="puedeApuntar()" ng-if="currentUser">Nuevo Gasto</a></li>
       <li data-match-route="/$/nuevoIngreso"><a href="/nuevoIngreso" ng-if="currentUser">Nuevo Ingreso</a></li>
       <li data-match-route="/$/nuevaConsumicion"><a href="/nuevaConsumicion" ng-if="currentUser">Nueva Consumición</a></li>
     </ul>
