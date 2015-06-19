@@ -33,7 +33,24 @@
 			</tfoot>
 			</table>
 			</div>
-
+			
+			<div class="panel-body">
+			<table class="table table-resposive">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Cantidad</th>
+				</tr>
+			</thead>
+			<tbody  ng-repeat="(key, value) in listaHoy">
+				<tr>
+					<td>{{key}}</td>
+					<td>{{value}}</td>
+				</tr>
+			</tbody>
+			</table>
+			</div>
+			
 			<div class="panel-body">
 			<table class="table table-resposive">
 			<thead>
@@ -47,8 +64,8 @@
 			</thead>
 			<tbody  ng-repeat="persona in personas track by $index">
 				<tr >
-					<td> {{persona.nombre}}</td>
-					<td> {{persona.balance | number : 2}}</td>
+					<td ng-class="{danger: persona.balance < 0}"> {{persona.nombre}}</td>
+					<td ng-class="{danger: persona.balance < 0}"> {{persona.balance | number : 2}}</td>
 					<td> {{persona.nBajadas}}</td>
 					<td> {{persona.NPagado}}</td>
 					<td> {{(persona.NPagado / persona.nBajadas) * 100 | number : 2 || 0}}

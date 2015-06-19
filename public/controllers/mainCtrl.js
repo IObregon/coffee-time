@@ -21,9 +21,11 @@ angular.module('Coffee-time')
 				}
 			i++;
 			});
+			getLista();
 			$scope.index = paga ;
   			getTotal();
         getBote();
+		
   		})
   		.error(function(data, status, header, config){
   			alert(data);
@@ -78,6 +80,29 @@ angular.module('Coffee-time')
   					}
   				});
   		}
+		
+		function getLista(){
+			var bajan = $scope.personasBajan;
+			var lista = {};
+			bajan.forEach(function(persona){
+				var gasto = persona.gastos[persona.gastos.length -1];
+				if (gasto.consumicion != null){
+					if(gasto.consumicion.nombre in lista){
+						lista[gasto.consumicion.nombre]++;
+					}else{
+						lista[gasto.consumicion.nombre] = 1;
+					}
+				}
+				if (gasto.consumicion2 != null){
+					if(gasto.consumicion2.nombre in lista){
+						lista[gasto.consumicion2.nombre]++;
+					}else{
+						lista[gasto.consumicion2.nombre] = 1;
+					}
+				}
+			});
+			$scope.listaHoy = lista;
+		}
 
       $scope.sendPago = function(cantidad){
 		  if(confirm("¿Estas seguro/a de que esto es lo que te ha cobrado el camarero/a?")){
