@@ -90,6 +90,15 @@ angular.module('Coffee-time')
 
 
 	getGasto(function(data){
+		alert(data.consumicion.tipo);
+		if(data.consumicion.tipo === "Comida"){
+			$scope.tipo="Comida";
+			$scope.Consumicion = data.consumicion.nombre;
+			$http.get('/api/consumicion/'+$scope.tipo2)
+	  		.success(function(data, status, header, config){
+	  			$scope.dataConsu1 = data;
+	  	});
+		}
 		if(data.consumicion2){
 			$scope.combo="Desayuno";
 			$scope.Consumicion2 = data.consumicion2.nombre;
