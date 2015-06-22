@@ -90,7 +90,6 @@ angular.module('Coffee-time')
 
 
 	getGasto(function(data){
-		alert(data.consumicion.tipo);
 		if(data.consumicion.tipo === "Comida"){
 			$scope.tipo="Comida";
 			$scope.Consumicion = data.consumicion.nombre;

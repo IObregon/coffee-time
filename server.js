@@ -351,6 +351,14 @@ app.get('/api/getHora', function(req, res, next){
 	res.send(200,hora);
 });
 
+app.post('/api/getGastosFechas', function(req, res, next){
+	var inicio = req.body.DiaInicio;
+	var fin = req.body.DiaFin;
+	Gasto.find({fecha: { $gte: inicio, $lt: fin}}).populate("_creador").exec(function(errs, docs){
+		res.send(docs);
+	})
+});
+
 app.get('*', function(req, res) {
   res.redirect('/#' + req.originalUrl);
 });
