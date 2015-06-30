@@ -230,16 +230,17 @@ app.post('/api/gasto', ensureAuthenticated, function(req, res, next) {
 
 app.delete('/api/gasto/:id', ensureAuthenticated, function(req, res, next) {
   console.log(req.params.id);
+  var id = req.params.id.split('|');
   Gasto.findOne({
-    _id: req.params.id
+    _id: id[0]
   }, function(err, gasto) {
-    Persona.findById(req.user._id, function(err, persona) {
-      persona.gastos.pull(req.params.id);
+    Persona.findById(id[1], function(err, persona) {
+      persona.gastos.pull(id[0]);
       persona.nBajadas -= 1;
       persona.balance += gasto.total;
       persona.save();
       Gasto.remove({
-        '_id': req.params.id
+        '_id': id[0]
       }, function(err) {
         if (err) {
           res.status(500);

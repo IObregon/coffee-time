@@ -1,5 +1,5 @@
 angular.module('Coffee-time')
-  .controller('MainCtrl', ['$scope','$http', '$route', function($scope, $http, $route) {
+  .controller('MainCtrl', ['$scope','$http', '$route', '$timeout', function($scope, $http, $route, $timeout) {
 		getLastPago(function(err, data){
 			$scope.PagadoYa = data;
 		});
@@ -102,7 +102,18 @@ angular.module('Coffee-time')
 				}
 			});
 			$scope.listaHoy = lista;
-		}
+		};
+		$scope.Invitar = function() {
+			if(confirm("¿Estas seguro/a de que has invitado a todo el mundo?, se borraran todas las consumiciones de hoy")){
+				$scope.personasBajan.forEach(function(persona){
+					$http.delete('/api/gasto/' + persona.gastos[persona.gastos.length -1]._id + '|' + persona._id);
+					$timeout(function() {
+							$route.reload();
+						}, 250);
+				});
+			}
+		};
+
 
       $scope.sendPago = function(cantidad){
 		  if(confirm("¿Estas seguro/a de que esto es lo que te ha cobrado el camarero/a?")){
