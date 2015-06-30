@@ -12,6 +12,7 @@ angular.module('Coffee-time')
               $location.path('/');
             })
             .error(function() {
+				alert('Usuario o Contraseña incorrectos.')
             });
         },
         signup: function(persona) {
