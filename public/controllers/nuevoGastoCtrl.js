@@ -4,6 +4,13 @@ angular.module('Coffee-time')
 
 
   	function nuevogasto(){
+  		var contador = Math.round($scope.currentUser.balance);
+  		while(contador < 0){
+  			if(!confirm('¿Eres conciente de que tu balance es: ' + $scope.currentUser.balance + ', y este mensaje aparece una vez por cada € ?')){
+  				return;
+  			}
+  			contador++;
+  		}
 	  	var Gasto = {};
 	  	Gasto.Consumicion = $scope.Consumicion;
 	  	Gasto.Consumicion2 = $scope.Consumicion2;
