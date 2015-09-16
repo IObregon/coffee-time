@@ -1,27 +1,62 @@
 angular.module('Coffee-time')
   .controller('NuevoGastoCtrl', ['$scope', '$http','$rootScope', '$location', function($scope, $http, $rootScope, $location) {
   	$scope.modo = "Alta";
-
-
+	$scope.contadorBucle = Math.round($scope.currentUser.balance);
+	function abrirDialog(callback){
+		var bol = 0;
+		var r = Math.floor((Math.random() * 9) + 1);
+		var vert = ['left top','right top', 'center top', 'left bottom','right bottom', 'center bottom','left center','right center', 'center center'];
+		$scope.contadorBucle++;
+		$dialog = $('#dialog');
+		$dialog.html("¿Eres conciente de que tu balance es:" + $scope.currentUser.balance + ", y este mensaje aparece una vez por cada € ?'");
+			$dialog.dialog({
+				//autoOpen: false,
+				resizable: false,
+				position:{ my:vert[r] , at:vert[r]  },
+				modal: true,
+				height: 250,
+				width: 400,
+				close: function (){
+						callback(bol)
+				},
+				buttons: {
+					"Si": function () {
+						bol = 1;
+						$dialog.dialog('close');
+					},
+					"No": function () {
+						$dialog.dialog('close');
+					}
+				}
+			});
+			//$dialog.dialog("open");
+			
+	}
+	dialogTocaPelotas=function (bol){
+		$dialog = $('#dialog');
+		$dialog.dialog("destroy");
+		if(bol === 1 && $scope.contadorBucle === 0){
+				var Gasto = {};
+				Gasto.Consumicion = $scope.Consumicion;
+				Gasto.Consumicion2 = $scope.Consumicion2;
+				$http.post('/api/gasto', Gasto)
+				.success(function(data, status, headers, config){
+					$scope.Gasto = {};
+					$location.path('/');
+				})
+				.error(function(data, status, header, config){
+					alert(data);
+				});
+			}else{
+				if(bol !== 1){
+					$scope.contadorBucle--;
+				}
+				abrirDialog(dialogTocaPelotas);
+			}
+	}
   	function nuevogasto(){
-  		var contador = Math.round($scope.currentUser.balance);
-  		while(contador < 0){
-  			if(!confirm('¿Eres conciente de que tu balance es: ' + $scope.currentUser.balance + ', y este mensaje aparece una vez por cada € ?')){
-  				return;
-  			}
-  			contador++;
-  		}
-	  	var Gasto = {};
-	  	Gasto.Consumicion = $scope.Consumicion;
-	  	Gasto.Consumicion2 = $scope.Consumicion2;
-	  	$http.post('/api/gasto', Gasto)
-	  	.success(function(data, status, headers, config){
-	  		$scope.Gasto = {};
-	  		$location.path('/');
-	  	})
-	  	.error(function(data, status, header, config){
-	  		alert(data);
-	  	});
+  		abrirDialog(dialogTocaPelotas);
+	  	
   	}
 
   	function modificarGasto(){
