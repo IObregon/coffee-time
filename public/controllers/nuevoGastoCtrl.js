@@ -32,11 +32,8 @@ angular.module('Coffee-time')
 			//$dialog.dialog("open");
 			
 	}
-	dialogTocaPelotas=function (bol){
-		$dialog = $('#dialog');
-		$dialog.dialog("destroy");
-		if(bol === 1 && $scope.contadorBucle === 0){
-				var Gasto = {};
+	function crearGasto(){
+		var Gasto = {};
 				Gasto.Consumicion = $scope.Consumicion;
 				Gasto.Consumicion2 = $scope.Consumicion2;
 				$http.post('/api/gasto', Gasto)
@@ -47,6 +44,12 @@ angular.module('Coffee-time')
 				.error(function(data, status, header, config){
 					alert(data);
 				});
+	}
+	dialogTocaPelotas=function (bol){
+		$dialog = $('#dialog');
+		$dialog.dialog("destroy");
+		if(bol === 1 && $scope.contadorBucle === 0 ){
+				crearGasto();
 			}else{
 				if(bol !== 1){
 					$scope.contadorBucle--;
@@ -55,7 +58,12 @@ angular.module('Coffee-time')
 			}
 	}
   	function nuevogasto(){
-  		abrirDialog(dialogTocaPelotas);
+		if($scope.contadorBucle > 0){
+			crearGasto();
+		}else{
+			abrirDialog(dialogTocaPelotas);
+		}
+  		
 	  	
   	}
 
