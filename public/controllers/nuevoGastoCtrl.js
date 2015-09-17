@@ -48,7 +48,7 @@ angular.module('Coffee-time')
 	dialogTocaPelotas=function (bol){
 		$dialog = $('#dialog');
 		$dialog.dialog("destroy");
-		if(bol === 1 && $scope.contadorBucle >== 0 ){
+		if(bol === 1 && $scope.contadorBucle >= 0 ){
 				crearGasto();
 			}else{
 				if(bol !== 1){
