@@ -116,7 +116,7 @@ angular.module('Coffee-time')
 
 
       $scope.sendPago = function(cantidad){
-		  if(confirm("¿Estas seguro/a de que esto es lo que te ha cobrado el camarero/a?")){
+		  if(confirm("¿Estas seguro/a de que el camarero te ha cobrado " + cantidad +"€?")){
 			var cant = {
 			  cantidad : cantidad
 			};
